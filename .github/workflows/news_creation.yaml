@@ -16,11 +16,11 @@ jobs:
       - name: Set up python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Install
         run: |
-          $CONDA/bin/conda install -c lsstts -c conda-forge pre-commit ts-pre-commit-config python=3.11 -y
+          $CONDA/bin/conda install -c lsstts -c conda-forge pre-commit ts-pre-commit-config python=3.12 -y
           $CONDA/bin/conda install -c conda-forge towncrier=23 -y
           $CONDA/bin/generate_pre_commit_conf --skip-pre-commit-install
   
