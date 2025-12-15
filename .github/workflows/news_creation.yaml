@@ -9,17 +9,18 @@ jobs:
     name: Check for new news fragments
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Set up python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
       - name: Install
         run: |
+          $CONDA/bin/conda install -c conda-forge conda -y
           $CONDA/bin/conda install -c lsstts -c conda-forge pre-commit ts-pre-commit-config python=3.12 -y
           $CONDA/bin/conda install -c conda-forge towncrier=23 -y
           $CONDA/bin/generate_pre_commit_conf --skip-pre-commit-install
