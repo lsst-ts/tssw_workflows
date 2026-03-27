@@ -2,6 +2,9 @@ name: lint
 
 on:
   workflow_call:
+    
+env:
+  PYTHON_VERSION = '3.13'
 
 jobs:
   lint:
@@ -12,12 +15,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.12'
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Install
         run: |
           $CONDA/bin/conda config --set solver classic
-          $CONDA/bin/conda install -c lsstts -c conda-forge pre-commit ts-pre-commit-config python=3.12 -y
+          $CONDA/bin/conda install -c lsstts -c conda-forge pre-commit ts-pre-commit-config python=${{ env.PYTHON_VERSION }} -y
           $CONDA/bin/generate_pre_commit_conf --skip-pre-commit-install
 
       - name: Run pre commit checks
