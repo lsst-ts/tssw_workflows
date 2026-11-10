@@ -12,16 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: ${{ env.PYTHON_VERSION }}
+          auto-activate-base: true
 
       - name: Install
         run: |
-          $CONDA/bin/conda config --set solver classic
-          $CONDA/bin/conda install -c lsstts -c conda-forge pre-commit ts-pre-commit-config python=${{ env.PYTHON_VERSION }} -y
-          $CONDA/bin/generate_pre_commit_conf --skip-pre-commit-install
+          conda install -c lsstts -c conda-forge pre-commit ts-pre-commit-config python=${{ env.PYTHON_VERSION }} -y
+          generate_pre_commit_conf --skip-pre-commit-install
 
       - name: Run pre commit checks
-        run: $CONDA/bin/pre-commit run --all
+        run: pre-commit run --all
