@@ -9,6 +9,9 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
     steps:
       - uses: actions/checkout@v6
 
@@ -16,7 +19,6 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-          auto-activate-base: true
 
       - name: Install
         run: |
